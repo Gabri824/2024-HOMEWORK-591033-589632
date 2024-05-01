@@ -8,7 +8,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * 
  * @see Attrezzo
  * 
- * @version 1.0 
+ * @version 2.0 
  */
 
 public class Borsa {
@@ -82,9 +82,10 @@ public class Borsa {
 	public int getPeso() {
 		int peso = 0;
 		
-		for (int i= 0; i<this.numeroAttrezzi; i++)
-		    peso += this.attrezzi[i].getPeso();
-		
+		for (Attrezzo a : this.attrezzi) {
+			if(a!=null)
+				peso += a.getPeso();
+		}
 		return peso;
 	}
 	
@@ -135,8 +136,9 @@ public class Borsa {
 		 if (!this.isEmpty()) {
 			 
 		     s.append("Contenuto borsa ("+this.getPeso()+"kg/"+this.getPesoMax()+"kg): ");
-		     for (int i= 0; i<this.numeroAttrezzi; i++)
-		         s.append(attrezzi[i].toString()+" ");
+		     for (Attrezzo a : this.attrezzi)
+		    	 if(a!=null)
+		    		 s.append(a.toString()+" ");
 		 }
 		 else
 		 s.append("Borsa vuota");

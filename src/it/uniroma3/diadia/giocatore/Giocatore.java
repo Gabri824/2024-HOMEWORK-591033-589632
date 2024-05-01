@@ -10,7 +10,7 @@ package it.uniroma3.diadia.giocatore;
  * 
  * @see Borsa
  * 
- * @version 1.0
+ * @version 2.0
  */
 public class Giocatore {
 	

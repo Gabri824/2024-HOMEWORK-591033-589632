@@ -1,6 +1,5 @@
 package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
@@ -10,7 +9,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * 
  * @see Labirinto
  * @see Giocatore
- * @version base
+ * @version 2.0
  */
 
 public class Partita {

@@ -13,7 +13,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * @see Stanza
  * @see Attrezzo
  * 
- * @version 1.0
+ * @version 2.0
  */
 public class Labirinto {
 	
