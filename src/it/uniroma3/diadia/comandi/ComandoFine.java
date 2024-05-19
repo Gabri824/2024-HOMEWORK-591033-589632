@@ -18,7 +18,7 @@ public class ComandoFine implements Comando {
 
 	private IO console;
 	private static final String NOME="fine";
-	
+	public final static String MESSAGGIO_FINE = "Grazie di aver giocato!";
 	/**
 	 * Metodo che esegui il comando 
 	 * @param partita
@@ -26,7 +26,7 @@ public class ComandoFine implements Comando {
 	@Override
 	public void esegui(Partita partita) {
 		partita.setFinita();
-		console.mostraMessaggio("Grazie di aver giocato!"); 
+		console.mostraMessaggio(MESSAGGIO_FINE); 
 	}
 
 	@Override

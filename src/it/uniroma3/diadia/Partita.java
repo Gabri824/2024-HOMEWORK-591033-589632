@@ -9,7 +9,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * 
  * @see Labirinto
  * @see Giocatore
- * @version 2.0
+ * @version 3.0
  */
 
 public class Partita {
@@ -21,10 +21,10 @@ public class Partita {
 	/**
 	 * Metodo che crea un labirinto e un nuovo giocatore
 	 */
-	public Partita(){
+	public Partita(Labirinto labirinto){
 		giocatore= new Giocatore();
-		labirinto= new Labirinto();
-	    labirinto.creaStanze();
+		this.labirinto=labirinto;
+	    //labirinto.creaStanze();
 		this.finita = false;
 	}
 	

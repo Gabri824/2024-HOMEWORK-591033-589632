@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
@@ -26,12 +28,12 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
  * @see Comando
  * @see IO
  *          
- * @version 2.0
+ * @version 3.0
  */
 
 public class DiaDia {
 
-	static final private String MESSAGGIO_BENVENUTO = ""+
+	static final public String MESSAGGIO_BENVENUTO = ""+
 			"Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n" +
 			"Meglio andare al piu' presto in biblioteca a studiare. Ma dov'e'?\n"+
 			"I locali sono popolati da strani personaggi, " +
@@ -51,10 +53,11 @@ public class DiaDia {
 	 * Metodo per creare una nuova partita al gioco "diadia",
 	 * che prende come parametro una console e crea una partita
 	 * @param console
+	 * @param labirinto
 	 */
-	public DiaDia(IO console) {
+	public DiaDia(IO console, Labirinto labirinto) {
 		this.io=console;
-		this.partita = new Partita();
+		this.partita = new Partita(labirinto);
 	}
 
 	/**
@@ -185,7 +188,12 @@ public class DiaDia {
 
 	public static void main(String[] argc) {
 		IO io=new IOConsole();
-		DiaDia gioco = new DiaDia(io);
+		Labirinto labirinto = new LabirintoBuilder()
+		.addStanzaIniziale("LabCampusOne")
+		.addStanzaVincente("Biblioteca")
+		.addAdiacenza("LabCampusOne","Biblioteca","ovest")
+		.getLabirinto();
+		DiaDia gioco = new DiaDia(io, labirinto);
 		gioco.gioca();
 	}
 }

@@ -13,8 +13,12 @@ class LabirintoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		l=new Labirinto();
-		l.creaStanze();
+		l = Labirinto.newBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("martello", 3)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.getLabirinto();
 		s=new Stanza("Bagno");
 	}
 

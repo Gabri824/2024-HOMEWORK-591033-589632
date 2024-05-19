@@ -7,11 +7,14 @@ import org.junit.jupiter.api.Test;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 
 class ComandoPosaTest {
 
+	Labirinto l;
 	IO io;
 	ComandoPosa c;
 	Attrezzo a;
@@ -19,10 +22,16 @@ class ComandoPosaTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		l = new LabirintoBuilder()
+				.addStanzaIniziale("Atrio")
+				.addAttrezzo("martello", 3)
+				.addStanzaVincente("Biblioteca")
+				.addAdiacenza("Atrio", "Biblioteca", "nord")
+				.getLabirinto();
 		io=new IOConsole();
 		c=new ComandoPosa();
 		a=new Attrezzo("lampada", 5);
-		p=new Partita();
+		p=new Partita(l);
 		p.getGiocatore().getBorsa().addAttrezzo(a);
 		c.setIO(io);
 		c.setParametro(a.getNome());

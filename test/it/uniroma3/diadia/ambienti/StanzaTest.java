@@ -10,7 +10,7 @@ public class StanzaTest {
 	Stanza s1=new Stanza("s1");
 	Stanza s2=new Stanza("s2");
 	Attrezzo a=new Attrezzo("a", 10);
-	Attrezzo b=new Attrezzo("b", 4);
+	Attrezzo b=new Attrezzo("c", 4);
 	Attrezzo c=new Attrezzo("c", 7);
 
 	
@@ -47,5 +47,11 @@ public class StanzaTest {
 		s1.addAttrezzo(c);
 		assertTrue(s1.hasAttrezzo("c"));
 		
+	}
+	
+	@Test
+	public void testDueAttrezziConNomeUguale() {
+		s1.addAttrezzo(b);
+		assertFalse(s1.addAttrezzo(c));
 	}
 }
