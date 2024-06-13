@@ -14,7 +14,7 @@ import it.uniroma3.diadia.Partita;
  * 
  * @version 2.0
  */
-public class ComandoGuarda implements Comando {
+public class ComandoGuarda extends AbstractComando {
 
 	private IO console;
 	private static final String NOME="guarda";
@@ -30,10 +30,8 @@ public class ComandoGuarda implements Comando {
 		console.mostraMessaggio(partita.getGiocatore().getBorsa().toString());
 		console.mostraMessaggio("I CFU rimanenti al giocatore sono:");
 		console.mostraMessaggio(partita.getGiocatore().getCfu()+" CFU.\n");
-	}
-
-	@Override
-	public void setParametro(String parametro) {
+		console.mostraMessaggio("I personaggi presenti nella stanza sono:");
+		console.mostraMessaggio(partita.getLabirinto().getStanzaCorrente().getPersonaggio().getNome());
 	}
 
 	/**
@@ -45,11 +43,6 @@ public class ComandoGuarda implements Comando {
 		return NOME;
 	}
 
-	@Override
-	public String getParametro() {
-		return null;
-	}
-	
 	@Override
 	public void setIO(IO io) {
 		this.console=io;

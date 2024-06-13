@@ -14,7 +14,7 @@ import it.uniroma3.diadia.Partita;
  * 
  * @version 2.0
  */
-public class ComandoNonValido implements Comando {
+public class ComandoNonValido extends AbstractComando {
 
 	private IO console;
 	private static final String NOME="Non valido";
@@ -28,10 +28,6 @@ public class ComandoNonValido implements Comando {
 		console.mostraMessaggio("Comando non valido!");
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-	}
-
 	/**
 	 * Metodo che ritorna il nome del comando
 	 * @return NOME
@@ -41,11 +37,6 @@ public class ComandoNonValido implements Comando {
 		return NOME;
 	}
 
-	@Override
-	public String getParametro() {
-		return null;
-	}
-	
 	@Override
 	public void setIO(IO io) {
 		this.console=io;

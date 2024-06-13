@@ -5,13 +5,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto.LabirintoBuilder;
+
 class LabirintoBuilderTest {
 
 	LabirintoBuilder lb;
 	
+	
 	@BeforeEach
 	void setUp() throws Exception {
-		lb=new LabirintoBuilder();
+		lb=new LabirintoBuilder("labirinto2.txt");
 	}
 
 	@Test
@@ -44,36 +47,37 @@ class LabirintoBuilderTest {
 		lb.addStanzaIniziale("salotto");
 		lb.getNome2Stanza().put("bagno", new Stanza("bagno"));
 		
-		lb.addAdiacenza("salotto", "bagno", "est");
+		lb.addAdiacenza("salotto", "bagno",  Direzione.est);
 		
-		assertEquals(lb.getLabirinto().getStanzaCorrente().getStanzaAdiacente("est"), lb.getNome2Stanza().get("bagno"));
+		assertEquals(lb.getLabirinto().getStanzaCorrente().getStanzaAdiacente(Direzione.est), lb.getNome2Stanza().get("bagno"));
 	}
 
 	@Test
 	void testAddStanzaMagica() {
 		lb.addStanzaMagica("camera");
 		lb.addStanzaIniziale("salotto");
-		lb.addAdiacenza("salotto", "camera", "nord");
 		
-		assertEquals(lb.getLabirinto().getStanzaCorrente().getStanzaAdiacente("nord"), lb.getNome2Stanza().get("camera"));
+		lb.addAdiacenza("salotto", "camera",  Direzione.nord);
+		
+		assertEquals(lb.getLabirinto().getStanzaCorrente().getStanzaAdiacente(Direzione.nord), lb.getNome2Stanza().get("camera"));
 	}
 
 	@Test
 	void testAddStanzaBuia() {
 		lb.addStanzaBuia("camera", "torcia");
 		lb.addStanzaIniziale("salotto");
-		lb.addAdiacenza("salotto", "camera", "nord");
+		lb.addAdiacenza("salotto", "camera", Direzione.nord);
 		
-		assertEquals(lb.getLabirinto().getStanzaCorrente().getStanzaAdiacente("nord"), lb.getNome2Stanza().get("camera"));
+		assertEquals(lb.getLabirinto().getStanzaCorrente().getStanzaAdiacente(Direzione.nord), lb.getNome2Stanza().get("camera"));
 	}
 
 	@Test
 	void testAddStanzaBloccata() {
-		lb.addStanzaBloccata("camera", "nord", "chiave");
+		lb.addStanzaBloccata("camera", Direzione.nord, "chiave");
 		lb.addStanzaIniziale("salotto");
-		lb.addAdiacenza("salotto", "camera", "nord");
+		lb.addAdiacenza("salotto", "camera", Direzione.nord);
 		
-		assertEquals(lb.getLabirinto().getStanzaCorrente().getStanzaAdiacente("nord"), lb.getNome2Stanza().get("camera"));
+		assertEquals(lb.getLabirinto().getStanzaCorrente().getStanzaAdiacente(Direzione.nord), lb.getNome2Stanza().get("camera"));
 	}
 
 }

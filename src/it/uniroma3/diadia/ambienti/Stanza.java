@@ -2,6 +2,7 @@ package it.uniroma3.diadia.ambienti;
 import java.util.*;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -22,8 +23,10 @@ public class Stanza {
 	private String nome;
 	private Map<String, Attrezzo> nome_attrezzi;
 	private int numeroAttrezzi;
-	private Map<String, Stanza> direzioni_stanzeAdiacenti; 
+	private Map<Direzione, Stanza> direzioni_stanzeAdiacenti; 
 	private int numeroStanzeAdiacenti;
+	
+	private AbstractPersonaggio personaggio;
     //private Attrezzo[] attrezzi;
     
     //private Stanza[] stanzeAdiacenti;
@@ -45,13 +48,23 @@ public class Stanza {
         //this.attrezzi = new Attrezzo[NUMERO_MASSIMO_ATTREZZI];
     }
 
+    public List<Stanza> getStanzeAdiacenti(){
+    	List<Stanza> stanzeAdiacenti=new ArrayList<>();
+    	
+    	for(Stanza s: this.direzioni_stanzeAdiacenti.values()) {
+    		stanzeAdiacenti.add(s);
+    	}
+    	
+    	return stanzeAdiacenti;
+    }
+    
     /**
      * Imposta una stanza adiacente.
      *
      * @param direzione direzione in cui sara' posta la stanza adiacente.
      * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
      */
-    public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
+    public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
     	boolean aggiornato = false;
         if(this.direzioni_stanzeAdiacenti.containsKey(direzione)) {
         	this.direzioni_stanzeAdiacenti.put(direzione, stanza);
@@ -80,7 +93,7 @@ public class Stanza {
      * Restituisce la stanza adiacente nella direzione specificata
      * @param direzione
      */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
         return this.direzioni_stanzeAdiacenti.get(direzione);
 		//Stanza stanza = null;
         
@@ -212,7 +225,7 @@ public class Stanza {
 	 * Metodo che restituisce l'array delle direzioni
 	 * @return l'array delle direzioni
 	 */
-	public Set<String> getDirezioni() {
+	public Set<Direzione> getDirezioni() {
 		return this.direzioni_stanzeAdiacenti.keySet();
 		/*
 		String[] direzioni = new String[this.numeroStanzeAdiacenti];
@@ -220,6 +233,18 @@ public class Stanza {
 	    	direzioni[i] = this.direzioni[i];
 	    return direzioni;*/
     }
+	
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+	
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
+	}
+	
+	public int getNumeroAttrezzi(){
+		return this.numeroAttrezzi;
+	}
 	
 	@Override
 	public int hashCode() {

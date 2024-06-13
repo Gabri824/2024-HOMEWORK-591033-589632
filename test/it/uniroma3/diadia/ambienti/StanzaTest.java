@@ -17,13 +17,13 @@ public class StanzaTest {
 	
 	@Test
 	public void testImpostaStanzaAdiacente() {	
-		s1.impostaStanzaAdiacente("nord", s2);	
-		assertEquals(s2,s1.getStanzaAdiacente("nord"));
+		s1.impostaStanzaAdiacente(Direzione.nord, s2);	
+		assertEquals(s2,s1.getStanzaAdiacente(Direzione.nord));
 	}
 
 	@Test
 	public void testGetStanzaAdiacente() {
-		assertNull(s1.getStanzaAdiacente("nord"));
+		assertNull(s1.getStanzaAdiacente(Direzione.nord));
 	}
 
 	@Test
@@ -52,6 +52,6 @@ public class StanzaTest {
 	@Test
 	public void testDueAttrezziConNomeUguale() {
 		s1.addAttrezzo(b);
-		assertFalse(s1.addAttrezzo(c));
+		assertTrue(s1.addAttrezzo(c));
 	}
 }

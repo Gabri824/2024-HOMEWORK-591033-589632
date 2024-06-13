@@ -20,7 +20,7 @@ class StanzaBuiaTest {
 		buio="qui c'è buio pesto";
 		lampada=new Attrezzo("lampada", 3);
 		
-		s1.impostaStanzaAdiacente("est", s2);
+		s1.impostaStanzaAdiacente(Direzione.est, s2);
 	}
 
 	@Test

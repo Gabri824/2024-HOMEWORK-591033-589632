@@ -1,12 +1,14 @@
 package it.uniroma3.diadia;
 
+import java.util.Scanner;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 //import java.util.Scanner;
 
@@ -84,7 +86,7 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica(this.io);
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva(this.io);
 		comandoDaEseguire = factory.costruisciComando(istruzione);
 		comandoDaEseguire.esegui(this.partita);
 		if (this.partita.vinta())
@@ -186,14 +188,17 @@ public class DiaDia {
 			io.mostraMessaggio("L'attrezzo non è prensente nella borsa.\n");
 	}*/
 
-	public static void main(String[] argc) {
-		IO io=new IOConsole();
-		Labirinto labirinto = new LabirintoBuilder()
-		.addStanzaIniziale("LabCampusOne")
-		.addStanzaVincente("Biblioteca")
-		.addAdiacenza("LabCampusOne","Biblioteca","ovest")
-		.getLabirinto();
+	public static void main(String[] argc) throws Exception {
+		Scanner scanner = new Scanner(System.in);
+		IO io=new IOConsole(scanner);
+		Labirinto labirinto = Labirinto.newBuilder("labirinto3.txt").getLabirinto();
+			
+		//.addStanzaIniziale("LabCampusOne")
+		//.addStanzaVincente("Biblioteca")
+		//.addAdiacenza("LabCampusOne","Biblioteca","ovest")
+		//.getLabirinto();
 		DiaDia gioco = new DiaDia(io, labirinto);
 		gioco.gioca();
+		scanner.close();
 	}
 }

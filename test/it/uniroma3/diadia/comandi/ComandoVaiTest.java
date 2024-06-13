@@ -2,8 +2,10 @@ package it.uniroma3.diadia.comandi;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,17 +31,17 @@ class ComandoVaiTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		pieno=new ComandoVai();
-		l=Labirinto.newBuilder()
-				.addStanzaIniziale("Atrio")
-				.addAttrezzo("martello", 3)
-				.addStanzaVincente("Biblioteca")
-				.addAdiacenza("Atrio", "Biblioteca", "nord")
-				.getLabirinto();
+		l = Labirinto.newBuilder("labirinto.txt").getLabirinto();
+			//	.addStanzaIniziale("Atrio")
+			//	.addAttrezzo("martello", 3)
+			//	.addStanzaVincente("Biblioteca")
+			//	.addAdiacenza("Atrio", "Biblioteca", "nord")
+			//	.getLabirinto();
 		p=new Partita(l);
 		vuoto=new ComandoVai();
 		s1=new Stanza("bagno");
 		s2=new Stanza("salone");
-		io=new IOConsole();
+		io=new IOConsole(new Scanner(System.in));
 		vuoto.setIO(io);
 		pieno.setIO(io);
 		righeDaLeggere=new ArrayList<>();
@@ -57,14 +59,14 @@ class ComandoVaiTest {
 	@Test
 	void testEsegui() {
 		p.getLabirinto().setStanzaCorrente(s1);
-		s1.impostaStanzaAdiacente("sud", s2);
+		s1.impostaStanzaAdiacente(Direzione.sud, s2);
 		pieno.setParametro("sud");
 		pieno.esegui(p);
 		assertEquals(s2, p.getLabirinto().getStanzaCorrente());
 	}
 	
 	@Test
-	void testPartitaConComandoVai() {
+	void testPartitaConComandoVai() throws FileNotFoundException, FormatoFileNonValidoException {
 		righeDaLeggere.add("vai nord");
 		IOSimulator s=Fixture.creaSimulazionePartitaEGiocaEasy(righeDaLeggere);
 		
@@ -77,7 +79,7 @@ class ComandoVaiTest {
 	}
 	
 	@Test
-	public void testPartitaConComandoVaiOvest() {
+	public void testPartitaConComandoVaiOvest() throws FileNotFoundException, FormatoFileNonValidoException {
 		righeDaLeggere2.add("vai ovest");
 		righeDaLeggere2.add("fine");
 

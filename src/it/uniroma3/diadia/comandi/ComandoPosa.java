@@ -14,7 +14,7 @@ import it.uniroma3.diadia.Partita;
  * 
  * @version 2.0
  */
-public class ComandoPosa implements Comando {
+public class ComandoPosa extends AbstractComando {
 
 	private String nomeAttrezzo;
 	private IO console;

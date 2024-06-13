@@ -14,7 +14,7 @@ import it.uniroma3.diadia.Partita;
  * 
  * @version 2.0
  */
-public class ComandoFine implements Comando {
+public class ComandoFine extends AbstractComando {
 
 	private IO console;
 	private static final String NOME="fine";
@@ -29,10 +29,6 @@ public class ComandoFine implements Comando {
 		console.mostraMessaggio(MESSAGGIO_FINE); 
 	}
 
-	@Override
-	public void setParametro(String parametro) {
-	}
-
 	/**
 	 * Metodo che ritorna il nome del comando
 	 * @return NOME
@@ -40,11 +36,6 @@ public class ComandoFine implements Comando {
 	@Override
 	public String getNome() {
 		return NOME;
-	}
-
-	@Override
-	public String getParametro() {
-		return null;
 	}
 	
 	@Override

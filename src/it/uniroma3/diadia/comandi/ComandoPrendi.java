@@ -16,7 +16,7 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  * 
  * @version 2.0
  */
-public class ComandoPrendi implements Comando {
+public class ComandoPrendi extends AbstractComando {
 
 	private String nomeAttrezzo;
 	private IO console;
